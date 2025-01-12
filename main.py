@@ -33,6 +33,12 @@ app.setStyleSheet("""
         color: red;
         border: 1px solid red;
     }
+    
+    QListWidget::item:hover {
+        background-color: gray;
+        color: blue;
+    }
+    
 """)
 
 label_image = QLabel("Тут буде картинка")
@@ -48,6 +54,9 @@ btn_updown = QPushButton("Перевернуть")
 btn_blur = QPushButton("Размыть")
 btn_find_edges = QPushButton("Найти грани")
 btn_bw = QPushButton("Ч/Б")
+
+btn_test = QPushButton("Жмых")
+btn_test2 = QPushButton("Хымж")
 
 row = QHBoxLayout()
 col1 = QVBoxLayout()
@@ -67,12 +76,15 @@ row_tools_conv.addWidget(btn_bw)
 row_tools_conv.addWidget(btn_blur)
 row_tools_conv.addWidget(btn_find_edges)
 
+row_tools_conv.addWidget(btn_test)
+row_tools_conv.addWidget(btn_test2)
+
 col2.addWidget(label_image)
 col2.addLayout(row_tools)
 col2.addLayout(row_tools_conv)
 
-row.addLayout(col1, stretch=1)
 row.addLayout(col2, stretch=3)
+row.addLayout(col1, stretch=1)
 win.setLayout(row)
 win.show()
 
@@ -115,5 +127,8 @@ btn_dir.clicked.connect(showFilenameList)
 btn_updown.clicked.connect(workimage.upside_down)
 btn_blur.clicked.connect(workimage.do_blur)
 btn_find_edges.clicked.connect(workimage.find_edges)
+
+btn_test.clicked.connect(workimage.do_func1)
+btn_test2.clicked.connect(workimage.do_func2)
 
 app.exec_()
