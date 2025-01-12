@@ -1,5 +1,6 @@
 import os.path
 from PIL import Image, ImageFilter
+from PIL.ImageChops import offset
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 
@@ -40,7 +41,7 @@ class ImageProcessor:
         self.showImage(image_path, self.lb_image)
 
     def do_right(self):
-        self.image = self.image.transpose(Image.ROTATE_270)
+        self.image = self.image.transpose(Image.ROTATE_275)
         self.saveImage()
         image_path = os.path.join(self.dir, self.save_dir, self.filename)
         self.showImage(image_path, self.lb_image)
@@ -76,3 +77,31 @@ class ImageProcessor:
         self.saveImage()
         image_path = os.path.join(self.dir, self.save_dir, self.filename)
         self.showImage(image_path, self.lb_image)
+
+    def do_func1(self):
+            kernel = ImageFilter.Kernel(
+                size=(3,3),
+                kernel=[0, -1, 0,
+                        -1, 5, -1,
+                        0, -1, 0],
+                scale=None,
+                offset=0
+            )
+            self.image = self.image.filter(kernel)
+            self.saveImage()
+            image_path = os.path.join(self.dir, self.save_dir, self.filename)
+            self.showImage(image_path, self.lb_image)
+
+    def do_func2(self):
+            kernel = ImageFilter.Kernel(
+                size=(3,3),
+                kernel=[0, 5, 0,
+                        5, -1, 5,
+                        0, 5, 0],
+                scale=None,
+                offset=0
+            )
+            self.image = self.image.filter(kernel)
+            self.saveImage()
+            image_path = os.path.join(self.dir, self.save_dir, self.filename)
+            self.showImage(image_path, self.lb_image)
